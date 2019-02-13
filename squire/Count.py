@@ -489,9 +489,9 @@ def match_reads(R1, R2, strandedness, matched_file,unmatched_file1,unmatched_fil
 	newreadcommand=" ".join(newreadcommand_list)
 	sp.check_call(["/bin/sh","-c",newreadcommand])
 	#use join not awk because awk only takes 1st hit with shared value to find match
-	joincommand_list = ["join", "-j", "12", "-t", "$'\\t'", "-o", "1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,2.10", newread_1_v1, newread_2_v1, ">" , matched_file_10k_v1]
+	joincommand_list = ["join", "-j", "12", "-t", "$'\t'", "-o", "1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,2.10", newread_1_v1, newread_2_v1, ">" , matched_file_10k_v1]
 	joincommand=" ".join(joincommand_list)
-	sp.check_call(["/bin/sh","-c",joincommand])
+	sp.check_call(["/bin/bash","-c",joincommand])
 	pos_strand_2 =  """($3 -$12 <= 500 && $3 -$12 >= 0 && $2 >= $12 && $6=="+" && $5!=1000 && $15!=1000)""" #insert size < 500 & end of read1 will be after beginning of read 2 & start of read1 will be after beginning of read2
 	minus_strand_2 = """($13 -  $2 <= 500 && $13 -  $2 >= 0 && $12 >= $2 && $6=="-" && $5!=1000 && $15!=1000)""" #insert size < 500 & end of read2 will be after beginning of read 1 & start of read2 will be after beginning of read1
 	poly_pos_2 = """($3 -$12 <= 500 && $3 -$12 >= 0 && $2 >= $12 && $6=="+" && $5==1000 && $15 !=1000) || ($13 -  $2 <= 500 && $13-  $2 >= 0 && $12 >= $2 && $6=="+" && $5!=1000 && $15==1000)||($3 -$12 <= 500 && $3 -$12 >= 0 && $2 >= $12 && $6=="+" && $5==1000 && $15==1000)"""
@@ -533,9 +533,9 @@ def match_reads(R1, R2, strandedness, matched_file,unmatched_file1,unmatched_fil
 	newreadcommand=" ".join(newreadcommand_list)
 	sp.check_call(["/bin/sh","-c",newreadcommand])
 	#use join not awk because awk only takes 1st hit with shared value to find match
-	joincommand_list = ["join", "-j", "12", "-t", "$'\\t'", "-o", "1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,2.10", newread_1_v2, newread_2_v2, ">" , matched_file_10k_v2]
+	joincommand_list = ["join", "-j", "12", "-t", "$'\t'", "-o", "1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,2.10", newread_1_v2, newread_2_v2, ">" , matched_file_10k_v2]
 	joincommand=" ".join(joincommand_list)
-	sp.check_call(["/bin/sh","-c",joincommand])
+	sp.check_call(["/bin/bash","-c",joincommand])
 	awk_inout_v2 = [matched_file_10k_v2,  ">",  matched_file_v2]
 	if strandedness==1:
 		awkcommand2 = " ".join(awkcommand_list2+ awk_inout_v2)
